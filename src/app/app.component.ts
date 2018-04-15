@@ -1,11 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component, ViewChild} from '@angular/core';
+import {Nav, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { LoginPage} from "../pages/login/login";
+import {HomePage} from '../pages/home/home';
+import {LoginPage} from "../pages/login/login";
+import {CaloriesPage} from "../pages/calories/calories";
+import {HydrationPage} from "../pages/hydration/hydration";
+import {LeaderBoardPage} from "../pages/leader-board/leader-board";
+import {StepsPage} from "../pages/steps/steps";
+import {GroupPage} from "../pages/group/group";
+
 
 @Component({
   templateUrl: 'app.html'
@@ -15,15 +20,19 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      {title: 'Home', component: HomePage},
+      {title: 'Steps', component: StepsPage},
+      {title: 'Hydration', component: HydrationPage},
+      {title: 'Calories', component: CaloriesPage},
+      {title: 'LeaderBoard', component: LeaderBoardPage},
+      {title: 'My Group', component: GroupPage},
     ];
 
   }

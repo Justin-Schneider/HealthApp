@@ -1,5 +1,10 @@
 <ion-content padding-top>
 
+  <p class="logo">
+    <!-- <img src="http://placehold.it/300x200"/> -->
+    <img src="../../assets/imgs/images.png" />
+  </p>
+
   <form (submit)="doSignin()">
     <ion-list inset padding>
 
@@ -13,7 +18,7 @@
       </ion-item>
 
       <div padding>
-        <button ion-button color="accent" block>Login</button>
+        <button ion-button color="primary" block>Login</button>
         <p style="text-align: center">Don't you have an acccount? <a [navPush]="RegistrationPage">Signup</a></p>
       </div>
 

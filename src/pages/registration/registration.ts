@@ -30,6 +30,7 @@ export class RegistrationPage {
     user.set("password", this.password);
     user.set("email", this.email);
 
+
     let self = this;
     user.signUp(null, {
       success: function (user) {

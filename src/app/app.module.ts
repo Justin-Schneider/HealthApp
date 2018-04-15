@@ -5,11 +5,15 @@ import { IonicStorageModule } from "@ionic/storage";
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages//login/login';
 import { RegistrationPage } from '../pages/registration/registration';
+import { CaloriesPage } from '../pages/calories/calories';
+import { GroupPage } from '../pages/group/group';
+import { HydrationPage } from '../pages/hydration/hydration';
+import { LeaderBoardPage } from '../pages/leader-board/leader-board';
+import { StepsPage } from '../pages/steps/steps';
+import { CreateGroupPage } from "../pages/create-group/create-group";
 import { Data } from '../providers/data';
-
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,9 +23,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
-    RegistrationPage
+    RegistrationPage,
+    CaloriesPage,
+    GroupPage,
+    HydrationPage,
+    LeaderBoardPage,
+    StepsPage,
+    CreateGroupPage
   ],
   imports: [
     BrowserModule,
@@ -32,9 +41,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
-    RegistrationPage
+    RegistrationPage,
+    CaloriesPage,
+    GroupPage,
+    HydrationPage,
+    LeaderBoardPage,
+    StepsPage,
+    CreateGroupPage
   ],
   providers: [
     StatusBar,

@@ -1,6 +1,6 @@
-import {Storage} from '@ionic/storage';
-import {Injectable} from '@angular/core';
-import {Parse} from 'parse';
+import { Storage } from '@ionic/storage';
+import { Injectable } from '@angular/core';
+import { Parse } from 'parse';
 
 
 @Injectable()
@@ -15,9 +15,24 @@ export class Data {
     Parse.initialize(this.parseAppId, this.parseJSKey);
     Parse.serverURL = this.parseServerUrl;
 
-    console.log('Initiated Parse');
-
   }
 
+  getDataGroups(){
+    const Group = Parse.Object.extend("Group");
+    let query = new Parse.Query(Group);
+    query.limit(1000);
+    let items = [];
+    query.find().then((groups) => {
+      for(let i = groups.length - 1; i >= 0; i--){
+
+        let MyGroups = {
+          name:groups[i].get("name")
+        };
+        items.push(MyGroups);
+      }
+      return items;
+    });
+    return items;
+  }
 
 }
