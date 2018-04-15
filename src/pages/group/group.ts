@@ -26,9 +26,6 @@ export class GroupPage {
 
   }
 
-  //Updates the user's group
-  //Removes the user from the group's members
-  //Adds the user to the new group's members
   ChangeGroup(group) {
     let user = Parse.User.current();
     let Group = Parse.Object.extend("Group");
@@ -37,6 +34,7 @@ export class GroupPage {
     query.equalTo("name", user.get("Group"));
     query.find({
       success: function (results) {
+        alert("Successfully retrieved " + results.length);
         for (let i = 0; results.length > i; i++) {
           let object = results[i];
           for (let j = 0; j < object.get("members").length; j++) {
@@ -57,6 +55,7 @@ export class GroupPage {
     query.equalTo("name", group.name);
     query.find({
       success: function(results) {
+        alert("Successfully retrieved " + results.length );
         for(let i = 0; i < results.length; i++){
           results[i].add("members", user);
           results[i].save();
