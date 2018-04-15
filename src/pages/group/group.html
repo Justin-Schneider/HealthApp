@@ -9,7 +9,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>My Group</ion-title>
+    <ion-title>Change Group</ion-title>
     <ion-buttons end>
       <button ion-button [navPush]="CreateGroupPage">
         <ion-icon name="add-circle"></ion-icon>
@@ -23,11 +23,11 @@
 
   <ion-list radio-group>
     <ion-list-header>
-      Change to another group
+      Current Group: {{userGroup}}
     </ion-list-header>
     <ion-item *ngFor="let group of groups">
       <ion-label>{{group.name}}</ion-label>
-      <ion-radio></ion-radio>
+      <ion-radio (click)="ChangeGroup(group)"></ion-radio>
     </ion-item>
   </ion-list>
 

@@ -14,17 +14,20 @@ export class CreateGroupPage {
   }
 
   ionViewDidLoad() {
+
   }
 
+  //TODO: if the user already has group remove it from the group
   public createGroup() {
     let user = Parse.User.current();
     let Group = Parse.Object.extend("Group");
     let group = new Group();
     group.set("name", this.GroupName);
+    user.set("Group", this.GroupName);
     group.add("members", user);
     group.save(null, {
       success: function (group) {
-        alert('New object created with objectId: ' + group.id);
+
       },
       error: function (group, error) {
         alert('Failed to create new object, with error code: ' + error.message);
