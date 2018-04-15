@@ -50,10 +50,10 @@ export class GroupPage {
         alert("Error: " + error.code + " " + error.message);
       }
     });
-    let Group = Parse.Object.extend("Group");
-    let query = new Parse.Query(Group);
-    query.equalTo("name", group.name);
-    query.find({
+    let Group2 = Parse.Object.extend("Group");
+    let query2 = new Parse.Query(Group2);
+    query2.equalTo("name", group.name);
+    query2.find({
       success: function(results) {
         alert("Successfully retrieved " + results.length );
         for(let i = 0; i < results.length; i++){
