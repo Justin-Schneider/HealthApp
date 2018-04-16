@@ -1,3 +1,25 @@
 page-hydration {
 
 }
+.row{
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+img{
+  display:block;
+  margin:auto;
+}
+.label{
+  display:block;
+  text-align: center;
+}
+#smallwater{
+  display: table-cell;
+}
+#water{
+  display: table-cell;;
+}
+#bigwater{
+  display: table-cell;
+}

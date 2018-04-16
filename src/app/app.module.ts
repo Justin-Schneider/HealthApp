@@ -14,6 +14,7 @@ import { LeaderBoardPage } from '../pages/leader-board/leader-board';
 import { StepsPage } from '../pages/steps/steps';
 import { CreateGroupPage } from "../pages/create-group/create-group";
 import { Data } from '../providers/data';
+import {AddHydrationPage} from "../pages/add-hydration/add-hydration";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +31,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HydrationPage,
     LeaderBoardPage,
     StepsPage,
-    CreateGroupPage
+    CreateGroupPage,
+    AddHydrationPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HydrationPage,
     LeaderBoardPage,
     StepsPage,
-    CreateGroupPage
+    CreateGroupPage,
+    AddHydrationPage
   ],
   providers: [
     StatusBar,

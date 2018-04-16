@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the HydrationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component, ViewChild} from '@angular/core';
+import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {Chart} from 'chart.js'
+import {Parse} from 'parse';
+import {AddHydrationPage} from "../add-hydration/add-hydration";
 
 @Component({
   selector: 'page-hydration',
@@ -14,11 +10,144 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HydrationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('lineCanvas') lineCanvas;
+
+  lineChart: any;
+  labels = [];
+  data = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
+    let user = Parse.User.current();
+    let n = 0;
+    if(user.get("Hydration").length > 7) {
+      n = user.get("Hydration").length;
+    }
+    else{
+      n = 7;
+    }
+    let j = 0;
+    for( let i = n - 7; i < user.get("Hydration").length; i++){
+      this.labels[j] = user.get("Hydration")[i][1];
+      this.data[j] = user.get("Hydration")[i][0];
+      j++;
+    }
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(AddHydrationPage);
+    popover.present({
+      ev: myEvent
+    });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HydrationPage');
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: this.labels,
+        datasets: [{
+          label: '# of Ounces drank',
+          data: this.data,
+          backgroundColor: [
+            'rgba(198, 40, 40, 0.2)'
+          ],
+          borderColor: [
+            'rgba(198, 40, 40, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+
+    });
+  }
+
+  addHydration(number) {
+    let user = Parse.User.current();
+
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    if(dd<10) {
+      dd = '0'+dd
+    }
+    if(mm<10) {
+      mm = '0'+mm
+    }
+    today = mm + '/' + dd;
+
+    let hydration = [number, today];
+
+    let added = false;
+    let userHydration = user.get("Hydration");
+    console.log(userHydration);
+    for(let i = 0; i < userHydration.length; i++){
+      if(userHydration[i][1] == today){
+        userHydration[i][0] += number;
+        added = true;
+      }
+    }
+    if(added == false){
+      user.add("Hydration", hydration);
+    }
+    else{
+      user.set("Hydration", userHydration);
+    }
+    user.save();
+
+
+
+    let n = 0;
+    if(user.get("Hydration").length > 7) {
+      n = user.get("Hydration").length;
+    }
+    else{
+      n = 7;
+    }
+    let j = 0;
+    for( let i = n - 7; i < user.get("Hydration").length; i++){
+      console.log(user.get("Hydration")[i]);
+      this.labels[j] = user.get("Hydration")[i][1];
+      this.data[j] = user.get("Hydration")[i][0];
+      j++;
+    }
+
+
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: this.labels,
+        datasets: [{
+          label: '# of Ounces drank',
+          data: this.data,
+          backgroundColor: [
+            'rgba(198, 40, 40, 0.2)'
+          ],
+          borderColor: [
+            'rgba(198, 40, 40, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+
+    });
   }
 
 }

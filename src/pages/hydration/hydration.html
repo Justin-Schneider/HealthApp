@@ -6,16 +6,54 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>HydrationPage</ion-title>
+    <ion-title>Your Hydration</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-card>
+    <ion-card-header>
+      Your weeks hydration
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div id="smallwater">
+      <img src="../../assets/imgs/water.png" (click)="addHydration(8)">
+      <ion-label>
+        <ion-icon name="add-circle-outline"></ion-icon>
+        (8 oz)
+      </ion-label>
+    </div>
+    <div id="water">
+      <img src="../../assets/imgs/smallwater.png" (click)="addHydration(12)">
+      <ion-label>
+        <ion-icon name="add-circle-outline"></ion-icon>
+        (12 oz)
+      </ion-label>
+    </div>
+    <div id="bigwater">
+      <img src="../../assets/imgs/bigwater.png" (click)="addHydration(24)">
+      <ion-label>
+        <ion-icon name="add-circle-outline"></ion-icon>
+        (24 oz)
+      </ion-label>
+    </div>
+  </div>
 </ion-content>
