@@ -1,6 +1,8 @@
-import { Component, ViewChild} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { Chart } from 'chart.js';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, NavParams, LoadingController} from 'ionic-angular';
+import {Chart} from 'chart.js';
+import {Parse} from 'parse';
+import {Data} from '../../providers/data';
 
 
 @Component({
@@ -17,19 +19,44 @@ export class LeaderBoardPage {
   doughnutChart: any;
   lineChart: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  group: string = '';
+  GroupMembers:string[];
+  LineData = [];
+  BarData = [];
+  PieData = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: Data, public loadingCtrl: LoadingController) {
+    let user = Parse.User.current();
+    this.group = user.get("Group");
   }
 
+
   ionViewDidLoad() {
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+      content: 'Please wait while we load your data.',
+      duration: 1500
+    });
+
+    loading.present();
+
+    this.GroupMembers = this.dataService.getGroupNames();
+    this.LineData = this.dataService.getLineData();
+    console.log(this.LineData);
+    this.PieData = this.dataService.getPieData();
+    this.BarData = this.dataService.getBarData();
+
+    setTimeout(() => {
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
       type: 'bar',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: this.GroupMembers,
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          data: this.BarData,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -53,7 +80,7 @@ export class LeaderBoardPage {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero:true
+              beginAtZero: true
             }
           }]
         }
@@ -65,10 +92,10 @@ export class LeaderBoardPage {
 
       type: 'doughnut',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: this.GroupMembers,
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          data: this.PieData,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -90,39 +117,34 @@ export class LeaderBoardPage {
 
     });
 
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-
-      type: 'line',
-      data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40],
-            spanGaps: false,
+      this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+        type: 'line',
+        data: {
+          labels: this.GroupMembers,
+          datasets: [{
+            label: '# of Ounces drank',
+            data: this.LineData,
+            backgroundColor: [
+              'rgba(198, 40, 40, 0.2)'
+            ],
+            borderColor: [
+              'rgba(198, 40, 40, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
           }
-        ]
-      }
+        }
 
-    });
-
+      });
+    }, 2500);
   }
 
 }

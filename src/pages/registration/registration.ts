@@ -29,7 +29,7 @@ export class RegistrationPage {
     user.set("username", this.username);
     user.set("password", this.password);
     user.set("email", this.email);
-
+    user.set("Hydration", []);
 
     let self = this;
     user.signUp(null, {

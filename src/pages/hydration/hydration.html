@@ -31,29 +31,41 @@
     </ion-card-content>
   </ion-card>
   <br>
-  <br>
-  <br>
-  <div class="row">
-    <div id="smallwater">
-      <img src="../../assets/imgs/water.png" (click)="addHydration(8)">
-      <ion-label>
-        <ion-icon name="add-circle-outline"></ion-icon>
-        (8 oz)
-      </ion-label>
+
+  <ion-card (click)="addHydration(8)">
+    <div style="float: right;z-index: 1;margin-top: 8%; margin-right: 10%">
+      <img src="../../assets/imgs/water.png">
     </div>
-    <div id="water">
-      <img src="../../assets/imgs/smallwater.png" (click)="addHydration(12)">
-      <ion-label>
-        <ion-icon name="add-circle-outline"></ion-icon>
-        (12 oz)
-      </ion-label>
+    <ion-card-header>
+      Add A Glass
+    </ion-card-header>
+    <ion-card-content>
+      8oz
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="addHydration(16)">
+    <div style="float: right;z-index: 1;margin-top: 3%; margin-right: 10.5%">
+      <img src="../../assets/imgs/smallwater.png">
     </div>
-    <div id="bigwater">
-      <img src="../../assets/imgs/bigwater.png" (click)="addHydration(24)">
-      <ion-label>
-        <ion-icon name="add-circle-outline"></ion-icon>
-        (24 oz)
-      </ion-label>
+    <ion-card-header>
+      Add A Bottle
+    </ion-card-header>
+    <ion-card-content>
+      16oz
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="addHydration(36)">
+    <div style="float: right; z-index: 1;margin-top: 2.5%; margin-right: 5%">
+      <img src="../../assets/imgs/bigwater.png">
     </div>
-  </div>
+    <ion-card-header>
+      Add A Large Bottle
+    </ion-card-header>
+    <ion-card-content>
+      36oz
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

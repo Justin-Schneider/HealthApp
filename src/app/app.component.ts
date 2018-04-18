@@ -10,7 +10,7 @@ import {HydrationPage} from "../pages/hydration/hydration";
 import {LeaderBoardPage} from "../pages/leader-board/leader-board";
 import {StepsPage} from "../pages/steps/steps";
 import {GroupPage} from "../pages/group/group";
-
+import {Parse} from 'parse';
 
 @Component({
   templateUrl: 'app.html'
@@ -50,5 +50,9 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  logout(){
+    Parse.User.logOut();
+    location.reload();
   }
 }

@@ -72,20 +72,8 @@ export class HydrationPage {
 
   addHydration(number) {
     let user = Parse.User.current();
-
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth() + 1;
-    if(dd<10) {
-      dd = '0'+dd
-    }
-    if(mm<10) {
-      mm = '0'+mm
-    }
-    today = mm + '/' + dd;
-
+    let today = new Date().toLocaleDateString();
     let hydration = [number, today];
-
     let added = false;
     let userHydration = user.get("Hydration");
     console.log(userHydration);
@@ -104,7 +92,6 @@ export class HydrationPage {
     user.save();
 
 
-
     let n = 0;
     if(user.get("Hydration").length > 7) {
       n = user.get("Hydration").length;
@@ -119,35 +106,7 @@ export class HydrationPage {
       this.data[j] = user.get("Hydration")[i][0];
       j++;
     }
-
-
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-      type: 'line',
-      data: {
-        labels: this.labels,
-        datasets: [{
-          label: '# of Ounces drank',
-          data: this.data,
-          backgroundColor: [
-            'rgba(198, 40, 40, 0.2)'
-          ],
-          borderColor: [
-            'rgba(198, 40, 40, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-
-    });
+    this.ionViewDidLoad();
   }
 
 }

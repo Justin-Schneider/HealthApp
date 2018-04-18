@@ -35,4 +35,74 @@ export class Data {
     return items;
   }
 
+  getGroupNames(){
+    let names = [];
+    let user = Parse.User.current();
+    let Group = Parse.Object.extend("Group");
+    let query = new Parse.Query(Group);
+    query.equalTo("name", user.get("Group"));
+    query.first({
+      success: function (object) {
+        for(let i = 0 ; i < object.get("members").length; i++){
+          names[i] = object.get("members")[i].get("username");
+        }
+        return names;
+      },
+      error: function (error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    return names;
+  }
+
+  getLineData(){
+    let data = [];
+    let user = Parse.User.current();
+    let Group = Parse.Object.extend("Group");
+    let query = new Parse.Query(Group);
+    query.equalTo("name", user.get("Group"));
+    query.first({
+      success: function (object) {
+        for(let i = 0 ; i < object.get("members").length; i++){
+          data[i] = object.get("members")[i].get("Hydration")[object.get("members")[i].get("Hydration").length - 1][0];
+        }
+        return data;
+      },
+      error: function (error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    return data;
+  }
+
+  getPieData(){
+    return [1,2];
+  }
+
+  getBarData(){
+    return [1,2,3];
+  }
+
+  setStepData(number){
+    let user = Parse.User.current();
+    let today = new Date().toLocaleDateString();
+    let steps = [number, today];
+    let added = false;
+    let userSteps = user.get("Steps");
+    console.log(userSteps);
+    for(let i = 0; i < userSteps.length; i++){
+      if(userSteps[i][1] == today){
+        userSteps[i][0] += steps;
+        added = true;
+      }
+    }
+    if(added == false){
+      user.add("Hydration", steps);
+    }
+    else{
+      user.set("Hydration", userSteps);
+    }
+    user.save();
+  }
+
 }

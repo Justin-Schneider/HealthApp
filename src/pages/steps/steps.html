@@ -5,17 +5,50 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>StepsPage</ion-title>
+    <ion-title>Your Steps</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Steps Taken Today
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-card>
+    <ion-item>
+      <ion-icon name="walk" item-start large></ion-icon>
+      <h2>Step Count</h2>
+      <p>{{steps}}</p>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="trophy" item-left large></ion-icon>
+      <h2>Progress Towards Goal</h2>
+      <p>Goal: {{steps}} / {{goal}}</p>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="flame" item-left large></ion-icon>
+      <h2>Calories Burnt</h2>
+      <p> {{calories.toFixed(2)}}</p>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="navigate" item-left large></ion-icon>
+      <h2>Miles Walked</h2>
+      <p> {{miles.toFixed(2)}}</p>
+    </ion-item>
+  </ion-card>
 </ion-content>

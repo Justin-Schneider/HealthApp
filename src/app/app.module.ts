@@ -16,6 +16,7 @@ import { CreateGroupPage } from "../pages/create-group/create-group";
 import { Data } from '../providers/data';
 import {AddHydrationPage} from "../pages/add-hydration/add-hydration";
 
+import { Pedometer } from '@ionic-native/pedometer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -57,7 +58,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Data
+    Data,
+    Pedometer
   ]
 })
 export class AppModule {}
