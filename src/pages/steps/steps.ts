@@ -26,7 +26,7 @@ export class StepsPage {
   miles: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private ref: ChangeDetectorRef, public platform: Platform, public pedometer: Pedometer, public dataService: Data) {
-    if(this.platform.is('cordova')){
+    // if(this.platform.is('cordova')){
       this.pedometer.startPedometerUpdates()
         .subscribe((data) => {
           this.steps = data.numberOfSteps;
@@ -35,7 +35,7 @@ export class StepsPage {
           this.dataService.setStepData((this.steps));
           this.ref.detectChanges();
         });
-    }
+    // }
   }
 
   ionViewDidLoad() {
