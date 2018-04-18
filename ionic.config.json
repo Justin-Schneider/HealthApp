@@ -1,6 +1,6 @@
 {
   "name": "HealthTrack",
-  "app_id": "",
+  "app_id": "ee1f291b",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

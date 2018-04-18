@@ -30,6 +30,8 @@ export class RegistrationPage {
     user.set("password", this.password);
     user.set("email", this.email);
     user.set("Hydration", []);
+    user.set("Steps", []);
+    user.set("Calories", []);
 
     let self = this;
     user.signUp(null, {

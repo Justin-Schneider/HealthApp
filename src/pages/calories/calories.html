@@ -10,12 +10,33 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>CaloriesPage</ion-title>
+    <ion-title>Your Calories</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      Your weeks calories
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <ion-card>
+    <ion-card-header>
+      How many calories have you eaten?
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="add-circle-outline" item-right large (click)="addCalories()"></ion-icon>
+        <ion-input type="number" [(ngModel)]="calories"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

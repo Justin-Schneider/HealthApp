@@ -73,13 +73,13 @@ export class HydrationPage {
   addHydration(number) {
     let user = Parse.User.current();
     let today = new Date().toLocaleDateString();
-    let hydration = [number, today];
+    let hydration = [Number(number), today];
     let added = false;
     let userHydration = user.get("Hydration");
     console.log(userHydration);
     for(let i = 0; i < userHydration.length; i++){
       if(userHydration[i][1] == today){
-        userHydration[i][0] += number;
+        userHydration[i][0] += Number(number);
         added = true;
       }
     }

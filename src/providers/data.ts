@@ -76,11 +76,43 @@ export class Data {
   }
 
   getPieData(){
-    return [1,2];
+    let data = [];
+    let user = Parse.User.current();
+    let Group = Parse.Object.extend("Group");
+    let query = new Parse.Query(Group);
+    query.equalTo("name", user.get("Group"));
+    query.first({
+      success: function (object) {
+        for(let i = 0 ; i < object.get("members").length; i++){
+          data[i] = object.get("members")[i].get("Steps")[object.get("members")[i].get("Steps").length - 1][0];
+        }
+        return data;
+      },
+      error: function (error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    return data;
   }
 
   getBarData(){
-    return [1,2,3];
+    let data = [];
+    let user = Parse.User.current();
+    let Group = Parse.Object.extend("Group");
+    let query = new Parse.Query(Group);
+    query.equalTo("name", user.get("Group"));
+    query.first({
+      success: function (object) {
+        for(let i = 0 ; i < object.get("members").length; i++){
+          data[i] = object.get("members")[i].get("Calories")[object.get("members")[i].get("Calories").length - 1][0];
+        }
+        return data;
+      },
+      error: function (error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    return data;
   }
 
   setStepData(number){

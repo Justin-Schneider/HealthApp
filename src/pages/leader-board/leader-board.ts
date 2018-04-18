@@ -45,7 +45,9 @@ export class LeaderBoardPage {
     this.LineData = this.dataService.getLineData();
     console.log(this.LineData);
     this.PieData = this.dataService.getPieData();
+    console.log(this.PieData);
     this.BarData = this.dataService.getBarData();
+    console.log(this.BarData);
 
     setTimeout(() => {
 
