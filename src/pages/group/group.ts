@@ -34,7 +34,6 @@ export class GroupPage {
     query.equalTo("name", user.get("Group"));
     query.find({
       success: function (results) {
-        alert("Successfully retrieved " + results.length);
         for (let i = 0; results.length > i; i++) {
           let object = results[i];
           for (let j = 0; j < object.get("members").length; j++) {
@@ -55,7 +54,6 @@ export class GroupPage {
     query2.equalTo("name", group.name);
     query2.find({
       success: function(results) {
-        alert("Successfully retrieved " + results.length );
         for(let i = 0; i < results.length; i++){
           results[i].add("members", user);
           results[i].save();

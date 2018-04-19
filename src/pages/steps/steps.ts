@@ -3,8 +3,10 @@ import {NavController, NavParams, Platform} from 'ionic-angular';
 import { Pedometer } from '@ionic-native/pedometer';
 import {Chart} from 'chart.js';
 import {Data} from '../../providers/data';
+import {Parse} from 'parse';
 
 /**
+ *
  * Generated class for the StepsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
@@ -60,6 +62,26 @@ export class StepsPage {
       }
 
     });
+  }
+  ionViewDidLeave(){
+    let user = Parse.User.current();
+    let today = new Date().toLocaleDateString();
+    let newSteps = [Number(this.steps), today];
+    let added = false;
+    let userSteps = user.get("Steps");
+    for(let i = 0; i < userSteps.length; i++){
+      if(userSteps[i][1] == today){
+        userSteps[i][0] += Number(this.steps);
+        added = true;
+      }
+    }
+    if(added == false){
+      user.add("Steps", newSteps);
+    }
+    else{
+      user.set("Steps", userSteps);
+    }
+    user.save();
   }
 
   setCalories(){

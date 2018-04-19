@@ -73,6 +73,7 @@ export class HydrationPage {
   addHydration(number) {
     let user = Parse.User.current();
     let today = new Date().toLocaleDateString();
+    console.log(today);
     let hydration = [Number(number), today];
     let added = false;
     let userHydration = user.get("Hydration");

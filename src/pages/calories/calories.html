@@ -33,9 +33,9 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-icon name="add-circle" item-right large (click)="addCalories()"></ion-icon>
         <ion-input type="number" [(ngModel)]="calories"></ion-input>
       </ion-item>
+      <button ion-button full (click)="addCalories()">Add Calories</button>
     </ion-card-content>
   </ion-card>
 
