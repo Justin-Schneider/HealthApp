@@ -20,14 +20,12 @@ export class LeaderBoardPage {
   lineChart: any;
 
   group: string = '';
-  GroupMembers:string[];
+  GroupMembers: string[];
   LineData = [];
   BarData = [];
   PieData = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: Data, public loadingCtrl: LoadingController) {
-    let user = Parse.User.current();
-    this.group = user.get("Group");
   }
 
 
@@ -43,81 +41,81 @@ export class LeaderBoardPage {
 
     this.GroupMembers = this.dataService.getGroupNames();
     this.LineData = this.dataService.getLineData();
-    console.log(this.LineData);
     this.PieData = this.dataService.getPieData();
-    console.log(this.PieData);
     this.BarData = this.dataService.getBarData();
-    console.log(this.BarData);
 
     setTimeout(() => {
 
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
+      let user = Parse.User.current();
+      this.group = user.get("Group");
 
-      type: 'bar',
-      data: {
-        labels: this.GroupMembers,
-        datasets: [{
-          label: '# of Votes',
-          data: this.BarData,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: this.GroupMembers,
+          datasets: [{
+            label: '# of Steps',
+            data: this.BarData,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+
+      });
+
+      this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+
+        type: 'doughnut',
+        data: {
+          labels: this.GroupMembers,
+          datasets: [{
+            label: '# of Votes',
+            data: this.PieData,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            hoverBackgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56"
+            ]
           }]
         }
-      }
 
-    });
-
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-
-      type: 'doughnut',
-      data: {
-        labels: this.GroupMembers,
-        datasets: [{
-          label: '# of Votes',
-          data: this.PieData,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
-        }]
-      }
-
-    });
+      });
 
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
         type: 'line',
@@ -146,7 +144,7 @@ export class LeaderBoardPage {
         }
 
       });
-    }, 2500);
+    }, 1000);
   }
 
 }

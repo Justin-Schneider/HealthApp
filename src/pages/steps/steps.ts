@@ -23,12 +23,12 @@ export class StepsPage {
 
   doughnutChart: any;
   steps: number = 0;
-  goal: number = 2000;
+  goal: number = 10000;
   calories: number = 0;
   miles: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private ref: ChangeDetectorRef, public platform: Platform, public pedometer: Pedometer, public dataService: Data) {
-    if(this.platform.is('android')){
+    if(this.platform.is('cordova')){
       this.pedometer.startPedometerUpdates()
         .subscribe((data) => {
           this.steps = data.numberOfSteps;
@@ -47,7 +47,7 @@ export class StepsPage {
       data: {
         labels: ['Steps', 'Goal'],
         datasets: [{
-          label: '# of Votes',
+          label: '# of Steps',
           data: [this.steps, this.goal-this.steps],
           backgroundColor: [
             'rgba(0, 131, 143, 0.4)',
