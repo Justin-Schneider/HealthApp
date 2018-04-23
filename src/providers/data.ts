@@ -153,7 +153,6 @@ export class Data {
     let steps = [number, today];
     let added = false;
     let userSteps = user.get("Steps");
-    console.log(userSteps);
     for (let i = 0; i < userSteps.length; i++) {
       if (userSteps[i][1] == today) {
         userSteps[i][0] += steps;
@@ -161,10 +160,10 @@ export class Data {
       }
     }
     if (added == false) {
-      user.add("Hydration", steps);
+      user.add("Steps", steps);
     }
     else {
-      user.set("Hydration", userSteps);
+      user.set("Steps", userSteps);
     }
     user.save();
   }
