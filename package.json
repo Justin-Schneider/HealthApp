@@ -40,7 +40,8 @@
     "cordova-plugin-ionic-webview": "^1.2.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-pedometer": "~0.4.1",
-    "cordova-android": "~7.0.0"
+    "cordova-android": "~7.0.0",
+    "cordova-plugin-facebook4": "~2.0.1"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
@@ -54,7 +55,11 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "1628658373913483",
+        "APP_NAME": "com.company.testapp"
+      }
     },
     "platforms": [
       "android"
