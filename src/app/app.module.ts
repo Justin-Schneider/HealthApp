@@ -15,11 +15,12 @@ import { StepsPage } from '../pages/steps/steps';
 import { CreateGroupPage } from "../pages/create-group/create-group";
 import { Data } from '../providers/data';
 import {AddHydrationPage} from "../pages/add-hydration/add-hydration";
+import {AddCaloriesPage} from "../pages/add-calories/add-calories";
 
 import { Pedometer } from '@ionic-native/pedometer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LeaderBoardPage,
     StepsPage,
     CreateGroupPage,
-    AddHydrationPage
+    AddHydrationPage,
+    AddCaloriesPage
   ],
   imports: [
     BrowserModule,
@@ -52,14 +54,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LeaderBoardPage,
     StepsPage,
     CreateGroupPage,
-    AddHydrationPage
+    AddHydrationPage,
+    AddCaloriesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Data,
-    Pedometer
+    Pedometer,
+    Facebook
   ]
 })
 export class AppModule {}

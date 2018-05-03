@@ -12,7 +12,7 @@
     </button>
     <ion-title>Your Hydration</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentPopover($event)">
+      <button ion-button icon-only [navPush]="AddHydrationPage">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>

@@ -11,6 +11,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Your Calories</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="AddCaloriesPage">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -26,17 +31,12 @@
       <canvas #lineCanvas></canvas>
     </ion-card-content>
   </ion-card>
-  <br>
-  <ion-card>
-    <ion-card-header>
-      How many calories have you eaten?
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-input type="number" [(ngModel)]="calories"></ion-input>
-      </ion-item>
-      <button ion-button full (click)="addCalories()">Add Calories</button>
-    </ion-card-content>
+
+  <ion-card *ngFor="let item of calories">
+    <ion-item >
+      <ion-label>On {{item[1]}} you ate {{item[0]}} calories</ion-label>
+    </ion-item>
   </ion-card>
+
 
 </ion-content>

@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Chart} from 'chart.js'
 import {Parse} from 'parse';
-
+import {AddCaloriesPage} from "../add-calories/add-calories";
 
 /**
  * Generated class for the CaloriesPage page.
@@ -19,10 +19,11 @@ export class CaloriesPage {
 
   @ViewChild('lineCanvas') lineCanvas;
 
+  AddCaloriesPage = AddCaloriesPage;
   lineChart: any;
   labels = [];
   data = [];
-  calories:number;
+  calories = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     let user = Parse.User.current();
@@ -39,6 +40,8 @@ export class CaloriesPage {
       this.data[j] = user.get("Calories")[i][0];
       j++;
     }
+    this.calories = user.get("Calories");
+    console.log(this.calories)
   }
 
   ionViewDidLoad() {
@@ -69,44 +72,6 @@ export class CaloriesPage {
         }
       }
     });
-  }
-  addCalories(){
-    let user = Parse.User.current();
-    let today = new Date().toLocaleDateString();
-    let userinfo = [Number(this.calories), today];
-    let added = false;
-    let UserCalories = user.get("Calories");
-    console.log(UserCalories);
-    for(let i = 0; i < UserCalories.length; i++){
-      if(UserCalories[i][1] == today){
-        UserCalories[i][0] += Number(this.calories);
-        added = true;
-      }
-    }
-    if(added == false){
-      user.add("Calories", userinfo);
-    }
-    else{
-      user.set("Calories", UserCalories);
-    }
-    user.save();
-
-
-    let n = 0;
-    if(user.get("Calories").length > 7) {
-      n = user.get("Calories").length;
-    }
-    else{
-      n = 7;
-    }
-    let j = 0;
-    for( let i = n - 7; i < user.get("Calories").length; i++){
-      console.log(user.get("Calories")[i]);
-      this.labels[j] = user.get("Calories")[i][1];
-      this.data[j] = user.get("Calories")[i][0];
-      j++;
-    }
-    this.ionViewDidLoad();
   }
 
 

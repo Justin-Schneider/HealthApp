@@ -2,7 +2,6 @@ import {Storage} from '@ionic/storage';
 import {Injectable} from '@angular/core';
 import {Parse} from 'parse';
 
-
 @Injectable()
 export class Data {
 
@@ -12,7 +11,7 @@ export class Data {
 
   constructor(public Storage: Storage) {
 
-    Parse.initialize(this.parseAppId, this.parseJSKey,);
+    Parse.initialize(this.parseAppId, this.parseJSKey);
     Parse.serverURL = this.parseServerUrl;
   }
 

@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {Chart} from 'chart.js'
 import {Parse} from 'parse';
 import {AddHydrationPage} from "../add-hydration/add-hydration";
@@ -12,11 +12,12 @@ export class HydrationPage {
 
   @ViewChild('lineCanvas') lineCanvas;
 
+  AddHydrationPage = AddHydrationPage;
   lineChart: any;
   labels = [];
   data = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     let user = Parse.User.current();
     let n = 0;
     if(user.get("Hydration").length > 7) {
@@ -31,13 +32,6 @@ export class HydrationPage {
       this.data[j] = user.get("Hydration")[i][0];
       j++;
     }
-  }
-
-  presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(AddHydrationPage);
-    popover.present({
-      ev: myEvent
-    });
   }
 
   ionViewDidLoad() {

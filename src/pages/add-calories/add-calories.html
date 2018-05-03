@@ -1,13 +1,7 @@
-<!--
-  Generated template for the AddHydrationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Add Hydration</ion-title>
+    <ion-title>Add Calories</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="close()">
         <ion-icon name="close"></ion-icon>
@@ -19,18 +13,18 @@
 
 
 <ion-content>
-  <form (submit)="addHydration()">
+  <form (submit)="addCalories()">
     <ion-list padding inset scroll="false">
 
       <ion-item>
-        <ion-label stacked>Number of Ounces</ion-label>
-        <ion-input type="number" [(ngModel)]="water" name="Ounces"></ion-input>
+        <ion-label stacked>Number of Calories</ion-label>
+        <ion-input type="number" [(ngModel)]="calories" name="Calroies"></ion-input>
       </ion-item>
 
       <div padding>
         <button ion-button color="primary" block
-                [disabled]="water == null">
-          Add Hydration
+                [disabled]="calories == null">
+          Add Calories
         </button>
       </div>
 

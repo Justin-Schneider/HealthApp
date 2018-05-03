@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {NavController, NavParams, Platform} from 'ionic-angular';
-import { Pedometer } from '@ionic-native/pedometer';
+import {Pedometer} from '@ionic-native/pedometer';
 import {Chart} from 'chart.js';
 import {Data} from '../../providers/data';
 import {Parse} from 'parse';
@@ -28,19 +28,44 @@ export class StepsPage {
   miles: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private ref: ChangeDetectorRef, public platform: Platform, public pedometer: Pedometer, public dataService: Data) {
-    if(this.platform.is('cordova')){
+    let user = Parse.User.current();
+    this.steps = user.get("Steps")[0][0];
+    this.calories = this.steps / 20;
+    this.miles = this.steps / 2000;
+  }
+
+  ionViewDidLoad() {
+
+    let user = Parse.User.current();
+    if (this.platform.is('cordova')) {
       this.pedometer.startPedometerUpdates()
         .subscribe((data) => {
           this.steps = data.numberOfSteps;
           this.setCalories();
           this.setMiles();
-          this.dataService.setStepData((this.steps));
+          this.dataService.setStepData((Number(this.steps)));
           this.ref.detectChanges();
+
+          let today = new Date().toLocaleDateString();
+          let newSteps = [Number(this.steps), today];
+          let added = false;
+          let userSteps = user.get("Steps");
+          for (let i = 0; i < userSteps.length; i++) {
+            if (userSteps[i][1] == today) {
+              userSteps[i][0] += Number(this.steps);
+              added = true;
+            }
+          }
+          if (added == false) {
+            user.add("Steps", newSteps);
+          }
+          else {
+            user.set("Steps", userSteps);
+          }
+          user.save();
         });
     }
-  }
 
-  ionViewDidLoad() {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
       type: 'doughnut',
@@ -48,7 +73,7 @@ export class StepsPage {
         labels: ['Steps', 'Goal'],
         datasets: [{
           label: '# of Steps',
-          data: [this.steps, this.goal-this.steps],
+          data: [this.steps, this.goal - this.steps],
           backgroundColor: [
             'rgba(0, 131, 143, 0.4)',
             'rgba(198, 40, 40, 0.4)',
@@ -63,31 +88,12 @@ export class StepsPage {
 
     });
   }
-  ionViewDidLeave(){
-    let user = Parse.User.current();
-    let today = new Date().toLocaleDateString();
-    let newSteps = [Number(this.steps), today];
-    let added = false;
-    let userSteps = user.get("Steps");
-    for(let i = 0; i < userSteps.length; i++){
-      if(userSteps[i][1] == today){
-        userSteps[i][0] += Number(this.steps);
-        added = true;
-      }
-    }
-    if(added == false){
-      user.add("Steps", newSteps);
-    }
-    else{
-      user.set("Steps", userSteps);
-    }
-    user.save();
-  }
 
-  setCalories(){
+  setCalories() {
     this.calories = this.steps / 20;
   }
-  setMiles(){
+
+  setMiles() {
     this.miles = this.steps / 2000;
   }
 }
