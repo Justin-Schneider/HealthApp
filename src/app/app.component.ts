@@ -11,6 +11,7 @@ import {LeaderBoardPage} from "../pages/leader-board/leader-board";
 import {StepsPage} from "../pages/steps/steps";
 import {GroupPage} from "../pages/group/group";
 import {Parse} from 'parse';
+import { Facebook } from '@ionic-native/facebook';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +23,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,  private fb: Facebook) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -52,6 +53,9 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   logout(){
+    this.fb.logout()
+      .then( res => location.reload())
+      .catch(e => console.log('Error logout from Facebook', e));
     Parse.User.logOut();
     location.reload();
   }

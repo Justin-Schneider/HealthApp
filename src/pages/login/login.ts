@@ -18,14 +18,17 @@ export class LoginPage {
   password: string = '';
   username: string = '';
 
+  isLoggedIn:boolean = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, data: Data, private fb: Facebook) {
     fb.getLoginStatus()
       .then(res => {
         console.log(res.status);
         if(res.status === "connect") {
-
+          this.isLoggedIn  = true;
+          this.navCtrl.setRoot(HomePage)
         } else {
-
+          this.isLoggedIn  = false;
         }
       })
       .catch(e => console.log(e));
@@ -39,11 +42,19 @@ export class LoginPage {
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then(res => {
         if(res.status === "connected") {
-
+          this.isLoggedIn  = true;
+          this.navCtrl.setRoot(HomePage)
         } else {
+          this.isLoggedIn  = false;
         }
       })
       .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+  logout() {
+    this.fb.logout()
+      .then( res => this.isLoggedIn = false)
+      .catch(e => console.log('Error logout from Facebook', e));
   }
 
   public doSignin() {
